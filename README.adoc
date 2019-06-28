@@ -1,0 +1,43 @@
+ifdef::env-github[]
+image:https://travis-ci.org/kalemena/docker-connectiq.svg[Travis build status, link=https://travis-ci.org/kalemena/docker-connectiq]
+image:https://images.microbadger.com/badges/version/kalemena/connectiq.svg[Docker Version, link=https://microbadger.com/images/kalemena/connectiq]
+image:https://images.microbadger.com/badges/image/kalemena/connectiq.svg[Docker Hub, link=https://hub.docker.com/r/kalemena/connectiq/tags]
+endif::[]
+
+= docker-connectiq
+
+Installation of Garmin Tools in docker.
+
+== Installation steps
+
+* link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[]
+
+=== Manualy
+
+```bash
+$ wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-2.4.4.zip
+$ export PATH=$PATH:path/to/connectiq-sdk/bin
+$ apt install -y libwebkitgtk
+```
+
+- install eclipse latest (Oxygen)
+
+=== Docker image
+
+Dockerfile recipe with monkeyc is available through docker hub.
+
+To rebuild the image, run:
+
+```bash
+$ make build
+```
+
+= Links
+
+* link:https://github.com/topics/connectiq[]
+* link:https://github.com/stynoo/docker-garmin-backup[]
+* link:https://github.com/blaskovicz/garmin-nest-camera-control[]
+* link:https://github.com/4ch1m/HueCIQ[]
+* link:https://github.com/britiger/PauseTimer-connectiq[]
+* link:https://github.com/bugjam/garmin-eta/tree/master/ETA[]
+* link:https://github.com/JoshuaTheMiller/Multivision-Watch[]
