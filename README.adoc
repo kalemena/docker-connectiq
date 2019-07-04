@@ -32,7 +32,20 @@ To rebuild the image, run:
 $ make build
 ```
 
+Running the image for sample compilation:
+
+```bash
+$ docker run --rm -it kalemena/connectiq bash
+$$ cd
+$$ openssl genrsa -out developer_key.pem 4096
+$$ openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt
+$$ cd /opt/ciq/samples/Attention/
+$$ monkeyc -d fenix5plus -f ./monkey.jungle -o attention.prg -y /root/developer_key.der 
+```
+
 = Links
+
+* link:http://starttorun.info/connect-iq-apps-with-source-code/[Tutorial by example]
 
 * link:https://github.com/topics/connectiq[]
 * link:https://github.com/stynoo/docker-garmin-backup[]
@@ -41,3 +54,4 @@ $ make build
 * link:https://github.com/britiger/PauseTimer-connectiq[]
 * link:https://github.com/bugjam/garmin-eta/tree/master/ETA[]
 * link:https://github.com/JoshuaTheMiller/Multivision-Watch[]
+

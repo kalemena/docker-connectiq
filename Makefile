@@ -7,3 +7,6 @@ build:
 	@echo "+++ Building docker image +++"
 	docker pull ubuntu:18.04
 	docker build --build-arg VERSION=$(VERSION) -t kalemena/connectiq:$(VERSION) .
+
+run:
+	docker run --rm -it kalemena/connectiq bash
