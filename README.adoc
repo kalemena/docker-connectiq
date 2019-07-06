@@ -46,7 +46,6 @@ $$ monkeyc -d fenix5plus -f ./monkey.jungle -o attention.prg -y /root/developer_
 = Links
 
 * link:http://starttorun.info/connect-iq-apps-with-source-code/[Tutorial by example]
-
 * link:https://github.com/topics/connectiq[]
 * link:https://github.com/stynoo/docker-garmin-backup[]
 * link:https://github.com/blaskovicz/garmin-nest-camera-control[]
@@ -54,4 +53,9 @@ $$ monkeyc -d fenix5plus -f ./monkey.jungle -o attention.prg -y /root/developer_
 * link:https://github.com/britiger/PauseTimer-connectiq[]
 * link:https://github.com/bugjam/garmin-eta/tree/master/ETA[]
 * link:https://github.com/JoshuaTheMiller/Multivision-Watch[]
-
+* link:https://apps.garmin.com/fr-FR/developer/9a164185-3030-48d9-9aef-f5351abe70d8/apps[Example with source]
+* link:https://github.com/bombsimon/garmin-seaside[Example with source]
+* link:https://github.com/tanstaaflFH/BabyLog-Feed-ConnectIQ[]
+* link:https://github.com/admsteck/ConnectIQ/tree/master/simple-battery[]
+* link:https://github.com/bombsimon/garmin-seaside[]
+* link:https://github.com/joshsamara/SlowWatch[]
