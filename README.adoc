@@ -10,17 +10,39 @@ Installation of Garmin Tools in docker.
 
 == Installation steps
 
-* link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[]
-
 === Manualy
 
 ```bash
+#### JDK 8 (not 11 !)
+$ apt-get install openjdk-8-jdk
+
+#### CERTIFICATE
+$ cd
+$ openssl genrsa -out developer_key.pem 4096
+$ openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt
+
+#### SDK
 $ wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-2.4.4.zip
 $ export PATH=$PATH:path/to/connectiq-sdk/bin
-$ apt install -y libwebkitgtk
+
+#### libs (not anothers!)
+$ apt install -y libwebkitgtk-1.0-0
+$ wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb
+$ dpkg -i /tmp/libpng12.deb
+$ rm /tmp/libpng12.deb
+
+#### TEST
+$ cd path/to/connectiq-sdk/samples/Drawable/
+$ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y ~/developer_key.der
+$ connectiq &
+$ monkeydo drawable.prg vivoactive3
 ```
 
-- install eclipse latest (Oxygen)
+
+image:res/Drawable.png[Sample app Drawable]
+
+
+- install eclipse for java following link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[Getting Started]
 
 === Docker image
 
