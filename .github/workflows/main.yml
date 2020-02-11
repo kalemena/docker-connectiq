@@ -1,0 +1,28 @@
+name: Pipeline
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Docker Image
+      env:
+        IMAGE: "kalemena/connectiq"
+        VERSION: "3.0.12-2019-06-12-77ed6f47e"
+      run: |
+        docker -v
+        docker pull ubuntu:16.04
+        docker pull ${IMAGE}:${VERSION} || true
+        docker build --pull --cache-from ${IMAGE}:${VERSION} \
+          -t ${IMAGE}:${VERSION} \
+          -f Dockerfile \
+          --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+          --build-arg VCS_REF=`git rev-parse --short HEAD` \
+          --build-arg VERSION=${VERSION} .
+        docker ps -a
+        docker tag ${IMAGE}:${VERSION} ${IMAGE}:latest
+        docker images
+        docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
+        docker push ${IMAGE}:${VERSION}
+        docker push ${IMAGE}:latest
+        docker logout
