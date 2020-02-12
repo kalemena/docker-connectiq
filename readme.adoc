@@ -7,64 +7,58 @@ endif::[]
 
 = docker-connectiq
 
-Installation of Garmin Tools in docker.
+Installation of Garmin Tools Connect IQ SDK and Eclipse IDE in Docker.
 
-== Installation steps
+Docker image is available through docker hub as link:https://hub.docker.com/r/kalemena/connectiq[kalemena/connectiq]
 
-=== Manualy
-
-```bash
-#### JDK 8 (not 11 !)
-$ apt-get install openjdk-8-jdk
-
-#### CERTIFICATE
-$ cd
-$ openssl genrsa -out developer_key.pem 4096
-$ openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt
-
-#### SDK
-$ wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-2.4.4.zip
-$ export PATH=$PATH:path/to/connectiq-sdk/bin
-
-#### libs (not anothers!)
-$ apt install -y libwebkitgtk-1.0-0
-$ wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb
-$ dpkg -i /tmp/libpng12.deb
-$ rm /tmp/libpng12.deb
-
-#### TEST
-$ cd path/to/connectiq-sdk/samples/Drawable/
-$ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y ~/developer_key.der
-$ connectiq &
-$ monkeydo drawable.prg vivoactive3
-```
-
-
-image:res/Drawable.png[Sample app Drawable]
-
-
-- install eclipse for java following link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[Getting Started]
-
-=== Docker image
-
-Dockerfile recipe with monkeyc is available through docker hub.
+== Usage
 
 To rebuild the image, run:
 
-```bash
-$ make build
-```
+    $ make build
 
 Running the image for sample compilation:
 
-```bash
-$ docker run --rm -it kalemena/connectiq bash
-$$ cd
-$$ openssl genrsa -out developer_key.pem 4096
-$$ openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt
-$$ cd /opt/ciq/samples/Attention/
-$$ monkeyc -d fenix5plus -f ./monkey.jungle -o attention.prg -y /root/developer_key.der 
-```
+    $ docker run --rm -it kalemena/connectiq bash
+    $$ cd
+    $$ openssl genrsa -out developer_key.pem 4096
+    $$ openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt
+    $$ cd /opt/ciq/samples/Attention/
+    $$ monkeyc -d fenix5plus -f ./monkey.jungle -o attention.prg -y /root/developer_key.der 
+
+== Installation steps
+
+.Manual installation steps
+[%collapsible]
+====
+    #### JDK 8 (not 11 !)
+    $ apt-get install openjdk-8-jdk
+
+    #### CERTIFICATE
+    $ cd
+    $ openssl genrsa -out developer_key.pem 4096
+    $ openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt
+
+    #### SDK
+    $ wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-2.4.4.zip
+    $ export PATH=$PATH:path/to/connectiq-sdk/bin
+
+    #### libs (not anothers!)
+    $ apt install -y libwebkitgtk-1.0-0
+    $ wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb
+    $ dpkg -i /tmp/libpng12.deb
+    $ rm /tmp/libpng12.deb
+
+    #### TEST
+    $ cd path/to/connectiq-sdk/samples/Drawable/
+    $ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y ~/developer_key.der
+    $ connectiq &
+    $ monkeydo drawable.prg vivoactive3
+====
+
+image:res/Drawable.png[Sample app Drawable]
+
+Install eclipse for java following link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[Getting Started]
 
 = Links
 
