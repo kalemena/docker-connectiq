@@ -1,8 +1,8 @@
 
 ifdef::env-github[]
 image:https://github.com/kalemena/docker-connectiq/workflows/Pipeline/badge.svg[GitHub Build]
-image:https://images.microbadger.com/badges/version/kalemena/node-red.svg[Docker Version, link=https://microbadger.com/images/kalemena/node-red]
-image:https://images.microbadger.com/badges/image/kalemena/node-red.svg[Docker Hub, link=https://hub.docker.com/r/kalemena/node-red/tags]
+image:https://images.microbadger.com/badges/version/kalemena/connectiq.svg[Docker Version, link=https://microbadger.com/images/kalemena/connectiq]
+image:https://images.microbadger.com/badges/image/kalemena/connectiq.svg[Docker Hub, link=https://hub.docker.com/r/kalemena/connectiq/tags]
 endif::[]
 
 = docker-connectiq
