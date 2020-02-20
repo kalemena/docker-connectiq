@@ -5,7 +5,7 @@ all: build
 
 build:
 	@echo "+++ Building docker image +++"
-	docker pull ubuntu:16.04
+	docker pull ubuntu:18.04
 	docker build --build-arg VERSION=$(VERSION) -t kalemena/connectiq:$(VERSION) .
 	docker tag kalemena/connectiq:$(VERSION) kalemena/connectiq:latest
 

@@ -29,6 +29,9 @@ Running the image for sample compilation:
     $$ connectiq &
     $$ monkeydo drawable.prg vivoactive3
 
+.Result of above commands
+image:res/Drawable.png[Sample app Drawable]
+
 == Installation steps
 
 .Manual installation steps
@@ -58,8 +61,6 @@ Running the image for sample compilation:
     $ connectiq &
     $ monkeydo drawable.prg vivoactive3
 ====
-
-image:res/Drawable.png[Sample app Drawable]
 
 Install eclipse for java following link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[Getting Started]
 

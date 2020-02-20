@@ -1,6 +1,4 @@
-FROM ubuntu:16.04
-
-MAINTAINER Kalemena
+FROM ubuntu:18.04
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -22,7 +20,7 @@ ENV LANG C.UTF-8
 # Compiler tools
 RUN apt-get update -y && \
     apt-get install -qqy openjdk-8-jdk && \
-    apt-get install -qqy unzip wget git ssh tar gzip ca-certificates libusb-1.0 libpng12-0 libwebkitgtk-1.0-0 && \
+    apt-get install -qqy unzip wget git ssh tar gzip ca-certificates libusb-1.0 libpng16-16 libgtk2.0-0 libwebkitgtk-1.0-0 libwebkitgtk-3.0-0 && \
     apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -32,13 +30,18 @@ RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
     unzip ciq.zip -d ciq && \
     rm -f ciq.zip
 
+# Fix missing libpng12 (monkeydo)
+RUN ln -s /usr/lib/x86_64-linux-gnu/libpng16.so.16 /usr/lib/x86_64-linux-gnu/libpng12.so.0
+
 # Install Eclipse IDE
-RUN apt-get update -y && \
-    apt-get install -qqy eclipse && \
-    apt-get clean && \
-	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ENV ECLIPSE_DOWNLOAD_URL=http://ftp.fau.de/eclipse/technology/epp/downloads/release/2019-12/R/eclipse-java-2019-12-R-linux-gtk-x86_64.tar.gz
+RUN wget ${ECLIPSE_DOWNLOAD_URL} -O /tmp/eclipse.tar.gz -q && \
+    echo "Installing eclipse JavaEE ${ECLIPSE_DOWNLOAD_URL}" && \
+    tar -xf /tmp/eclipse.tar.gz -C /opt && \
+    rm /tmp/eclipse.tar.gz
 
 ENV CIQ_HOME /opt/ciq/bin
-ENV PATH ${PATH}:${CIQ_HOME}
+ENV PATH ${PATH}:${CIQ_HOME}:/opt/eclipse
 
+# CMD [ "/opt/eclipse/eclipse" ]
 CMD [ "/bin/bash" ]
