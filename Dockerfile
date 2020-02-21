@@ -39,6 +39,14 @@ RUN wget ${ECLIPSE_DOWNLOAD_URL} -O /tmp/eclipse.tar.gz -q && \
     echo "Installing eclipse JavaEE ${ECLIPSE_DOWNLOAD_URL}" && \
     tar -xf /tmp/eclipse.tar.gz -C /opt && \
     rm /tmp/eclipse.tar.gz
+# Eclipse IDE plugins
+RUN cd /opt/eclipse && \
+    ./eclipse -clean -application org.eclipse.equinox.p2.director -noSplash \
+              -repository https://developer.garmin.com/downloads/connect-iq/eclipse/ \
+              -installIU connectiq.feature.ide.feature.group/ && \
+    ./eclipse -clean -application org.eclipse.equinox.p2.director -noSplash \
+              -repository https://developer.garmin.com/downloads/connect-iq/eclipse/ \
+              -installIU connectiq.feature.sdk.feature.group/
 
 ENV CIQ_HOME /opt/ciq/bin
 ENV PATH ${PATH}:${CIQ_HOME}:/opt/eclipse
