@@ -11,3 +11,6 @@ build:
 
 run:
 	bash ./run.sh
+
+eclipse:
+	COMMAND=/opt/eclipse/eclipse bash ./run.sh
