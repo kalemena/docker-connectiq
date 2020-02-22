@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+logging_log_file_location=/tmp/GARMIN/plugin.log
+notification_one_time_warning=true
+notification_show_popup=true
+pathPreference=/opt/ciq

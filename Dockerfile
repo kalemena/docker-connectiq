@@ -47,6 +47,7 @@ RUN cd /opt/eclipse && \
     ./eclipse -clean -application org.eclipse.equinox.p2.director -noSplash \
               -repository https://developer.garmin.com/downloads/connect-iq/eclipse/ \
               -installIU connectiq.feature.sdk.feature.group/
+ADD [ "IQ_IDE.prefs", "/root/eclipse-workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/IQ_IDE.prefs" ]
 
 ENV CIQ_HOME /opt/ciq/bin
 ENV PATH ${PATH}:${CIQ_HOME}:/opt/eclipse
