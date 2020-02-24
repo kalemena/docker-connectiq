@@ -47,7 +47,20 @@ RUN cd /opt/eclipse && \
     ./eclipse -clean -application org.eclipse.equinox.p2.director -noSplash \
               -repository https://developer.garmin.com/downloads/connect-iq/eclipse/ \
               -installIU connectiq.feature.sdk.feature.group/
-ADD [ "IQ_IDE.prefs", "/root/eclipse-workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/IQ_IDE.prefs" ]
+
+# Few prefs
+ADD [ "IQ_IDE.prefs", "/home/developer/eclipse-workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/IQ_IDE.prefs" ]
+
+# USER developer as 1000
+RUN mkdir -p /home/developer && \
+    echo "developer:x:1000:1000:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
+    echo "developer:x:1000:" >> /etc/group && \
+    chown developer:developer -R /home/developer && \
+    chown developer:developer -R /opt
+
+USER developer
+ENV HOME /home/developer
+WORKDIR /home/developer
 
 ENV CIQ_HOME /opt/ciq/bin
 ENV PATH ${PATH}:${CIQ_HOME}:/opt/eclipse

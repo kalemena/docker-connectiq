@@ -53,3 +53,5 @@ dkms.conf
 
 # Private files
 *.private
+*.der
+*.pem
