@@ -7,32 +7,69 @@ endif::[]
 
 = docker-connectiq
 
-Installation of Garmin Tools Connect IQ SDK and Eclipse IDE in Docker.
+Installation of Garmin Tools Connect IQ SDK and Eclipse IDE plugins as a Docker container.
 
 Docker image is available through docker hub as link:https://hub.docker.com/r/kalemena/connectiq[kalemena/connectiq]
 
 == Usage
 
-To rebuild the image, run:
+=== Docker Image pull / build / run
 
+.Pull the docker image:
+====
+    $ make pull
+====
+
+.Rebuild the image, run:
+====
     $ make build
+====
 
-Running the image for sample compilation:
+.Rebuild the image, run:
+====
+    $ make console
+====
 
-    $ bash ./run.sh
-    $$ cd
-    $$ openssl genrsa -out developer_key.pem 4096
-    $$ openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt
-    $$ 
+=== Garmin - ConnectIQ
+
+[WARNING]
+====
+Running *run.sh* (or command line *make console*, or *make eclipse*) will map current folder into */workspace* of the container instance. +
+For persistence reasons, any file or created project should be done in */workspace* folder.
+====
+
+==== Build app in console
+
+.Generate a certificate
+====
+    $ make console
+    $$ cd /workspace
+    $$ ./generate-certificate.sh    
+====
+
+.Building a sample app:
+====
+    $ make console
     $$ cd /opt/ciq/samples/Drawable/
-    $$ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y ~/developer_key.der
+    $$ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y /workspace/developer_key.der
     $$ connectiq &
     $$ monkeydo drawable.prg vivoactive3
+====
 
 .Result of above commands
 image:res/Drawable.png[Sample app Drawable]
 
-== Installation steps
+=== Authoring & Building app in Eclipse IDE
+
+.Authoring & Building app in Eclipse IDE
+====
+    $ make eclipse
+    $ FIXME
+====
+
+=== Uploading into 
+
+== Manual Installation steps
 
 .Manual installation steps
 [%collapsible]
@@ -68,6 +105,9 @@ Install eclipse for java following link:https://developer.garmin.com/connect-iq/
 
 * link:http://starttorun.info/connect-iq-apps-with-source-code/[Tutorial by example]
 * link:https://github.com/topics/connectiq[]
+
+== Apps
+
 * link:https://github.com/stynoo/docker-garmin-backup[]
 * link:https://github.com/blaskovicz/garmin-nest-camera-control[]
 * link:https://github.com/4ch1m/HueCIQ[]
@@ -75,8 +115,12 @@ Install eclipse for java following link:https://developer.garmin.com/connect-iq/
 * link:https://github.com/bugjam/garmin-eta/tree/master/ETA[]
 * link:https://github.com/JoshuaTheMiller/Multivision-Watch[]
 * link:https://apps.garmin.com/fr-FR/developer/9a164185-3030-48d9-9aef-f5351abe70d8/apps[Example with source]
-* link:https://github.com/bombsimon/garmin-seaside[Example with source]
 * link:https://github.com/tanstaaflFH/BabyLog-Feed-ConnectIQ[]
 * link:https://github.com/admsteck/ConnectIQ/tree/master/simple-battery[]
 * link:https://github.com/bombsimon/garmin-seaside[]
 * link:https://github.com/joshsamara/SlowWatch[]
+* link:https://github.com/vtrifonov-esfiddle/ConnectIQ-WatchTemperature[]
+
+== Eclipse
+
+* link:https://github.com/qperez/docker-eclipse-mt-jdk8[Running Eclipse from Mac]
