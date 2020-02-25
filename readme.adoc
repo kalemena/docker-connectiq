@@ -5,6 +5,14 @@ image:https://images.microbadger.com/badges/version/kalemena/connectiq.svg[Docke
 image:https://images.microbadger.com/badges/image/kalemena/connectiq.svg[Docker Hub, link=https://hub.docker.com/r/kalemena/connectiq/tags]
 endif::[]
 
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
 = docker-connectiq
 
 Installation of Garmin Tools Connect IQ SDK and Eclipse IDE plugins as a Docker container.
@@ -15,30 +23,20 @@ Docker image is available through docker hub as link:https://hub.docker.com/r/ka
 
 === Docker Image pull / build / run
 
-.Pull the docker image:
+.Pull or Build or Run the docker image:
 ====
     $ make pull
-====
-
-.Rebuild the image, run:
-====
+    or
     $ make build
-====
-
-.Running the image, run:
-====
+    or
     $ make console
 ====
 
-=== Garmin - ConnectIQ
-
-[WARNING]
+[TIP]
 ====
 Running *run.sh* (or command line *make console*, or *make eclipse*) will map current folder into */workspace* of the container instance. +
 For persistence reasons, any file or created project should be done in */workspace* folder.
 ====
-
-==== Build app in console
 
 .Generate a certificate
 ====
@@ -47,6 +45,8 @@ For persistence reasons, any file or created project should be done in */workspa
     $$ ./generate-certificate.sh    
 ====
 
+=== Building app in Console
+
 .Building a sample app:
 ====
     $ make console
@@ -54,12 +54,12 @@ For persistence reasons, any file or created project should be done in */workspa
     $$ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y /workspace/developer_key.der
     $$ connectiq &
     $$ monkeydo drawable.prg vivoactive3
-====
 
 .Result of above commands
 image:res/Drawable.png[Sample app Drawable]
+====
 
-==== Building app in Eclipse IDE
+=== Building app in Eclipse IDE
 
 .Building app in Eclipse IDE
 ====
@@ -81,14 +81,11 @@ image:res/eclipse-launch-config.png[]
 image:res/Drawable.png[Sample app Drawable]
 ====
 
-==== Authoring app in Eclipse IDE
+=== Authoring app in Eclipse IDE
 
-* Run following command
-
-[source,bash]
-----
+.Authoring a sample app:
+====
     $ make eclipse
-----
 
 * In Eclipse, Menu File => New => Project => Connect IQ Project
 * Make sure to create project under */workspace/...* hierarchy
@@ -96,6 +93,23 @@ image:res/Drawable.png[Sample app Drawable]
 * Then for example, *Vivoactive 3* as target
 * Then for example, *Sensor* or *Sensor History* as features
 * Once project is loaded, you can run like previous example to see the *monkey* default app display
+====
+
+=== Upload to Watch
+
+.Uploading to watch
+====
+
+* On Ubuntu OS
+* Connect the watch using original cable
+* Wait for about 30s
+* Watch screen should show it is mounted and charging
+* In File explorer, see *GARMIN* device and browse to *GARMIN/apps*
+* Copy *PRG* file built into this folder
+* Unmount *GARMIN* icon on watch
+* Watch should be showing *Verifying Connect IQ Apps*
+* Swipe up or down, the app should be visible
+====
 
 = Links
 
