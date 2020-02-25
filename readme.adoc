@@ -85,7 +85,10 @@ image:res/Drawable.png[Sample app Drawable]
 
 * Run following command
 
+[source,bash]
+----
     $ make eclipse
+----
 
 * In Eclipse, Menu File => New => Project => Connect IQ Project
 * Make sure to create project under */workspace/...* hierarchy
@@ -94,40 +97,9 @@ image:res/Drawable.png[Sample app Drawable]
 * Then for example, *Sensor* or *Sensor History* as features
 * Once project is loaded, you can run like previous example to see the *monkey* default app display
 
-== Manual Installation steps
-
-.Manual installation steps
-[%collapsible]
-====
-    #### JDK 8 (not 11 !)
-    $ apt-get install openjdk-8-jdk
-
-    #### CERTIFICATE
-    $ cd
-    $ openssl genrsa -out developer_key.pem 4096
-    $ openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt
-
-    #### SDK
-    $ wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-2.4.4.zip
-    $ export PATH=$PATH:path/to/connectiq-sdk/bin
-
-    #### libs (not anothers!)
-    $ apt install -y libwebkitgtk-1.0-0
-    $ wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb
-    $ dpkg -i /tmp/libpng12.deb
-    $ rm /tmp/libpng12.deb
-
-    #### TEST
-    $ cd path/to/connectiq-sdk/samples/Drawable/
-    $ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y ~/developer_key.der
-    $ connectiq &
-    $ monkeydo drawable.prg vivoactive3
-====
-
-Install eclipse for java following link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[Getting Started]
-
 = Links
 
+* link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[Getting Started]
 * link:http://starttorun.info/connect-iq-apps-with-source-code/[Tutorial by example]
 * link:https://github.com/topics/connectiq[]
 * link:https://developer.garmin.com/downloads/connect-iq/Wearable-Programming-for-the-Active-Lifestyle.pdf[Book PDF]
