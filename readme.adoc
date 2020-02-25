@@ -25,7 +25,7 @@ Docker image is available through docker hub as link:https://hub.docker.com/r/ka
     $ make build
 ====
 
-.Rebuild the image, run:
+.Running the image, run:
 ====
     $ make console
 ====
@@ -59,15 +59,29 @@ For persistence reasons, any file or created project should be done in */workspa
 .Result of above commands
 image:res/Drawable.png[Sample app Drawable]
 
-=== Authoring & Building app in Eclipse IDE
+=== Building app in Eclipse IDE
 
 .Authoring & Building app in Eclipse IDE
 ====
     $ make eclipse
-    $ FIXME
+
+.Keep default workspace location
+image:res/eclipse-workspace.png[]
+
+.Menu File => Import => Existing Projects into Workspace
+image:res/eclipse-import-project.png[]
+
+.Imported Project
+image:res/eclipse-Drawable-project.png[]
+
+.Launch Configuration
+image:res/eclipse-launch-config.png[]
+
+.Result of above commands
+image:res/Drawable.png[Sample app Drawable]
 ====
 
-=== Uploading into 
+=== Uploading  
 
 == Manual Installation steps
 
