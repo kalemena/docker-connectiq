@@ -23,7 +23,6 @@ Docker image is available through docker hub as link:https://hub.docker.com/r/ka
 
 === Docker Image pull / build / run
 
-.Pull or Build or Run the docker image:
 ====
     $ make pull
     or
@@ -34,11 +33,12 @@ Docker image is available through docker hub as link:https://hub.docker.com/r/ka
 
 [TIP]
 ====
-Running *run.sh* (or command line *make console*, or *make eclipse*) will map current folder into */workspace* of the container instance. +
+Command lines *run.sh*, *make console*, or *make eclipse* will map current folder into */workspace* of the container instance. +
 For persistence reasons, any file or created project should be done in */workspace* folder.
 ====
 
-.Generate a certificate
+=== Generate a certificate
+
 ====
     $ make console
     $$ cd /workspace
@@ -47,7 +47,6 @@ For persistence reasons, any file or created project should be done in */workspa
 
 === Building app in Console
 
-.Building a sample app:
 ====
     $ make console
     $$ cd /opt/ciq/samples/Drawable/
@@ -61,7 +60,6 @@ image:res/Drawable.png[Sample app Drawable]
 
 === Building app in Eclipse IDE
 
-.Building app in Eclipse IDE
 ====
     $ make eclipse
 
@@ -83,7 +81,6 @@ image:res/Drawable.png[Sample app Drawable]
 
 === Authoring app in Eclipse IDE
 
-.Authoring a sample app:
 ====
     $ make eclipse
 
@@ -97,9 +94,7 @@ image:res/Drawable.png[Sample app Drawable]
 
 === Upload to Watch
 
-.Uploading to watch
 ====
-
 * On Ubuntu OS
 * Connect the watch using original cable
 * Wait for about 30s
@@ -114,9 +109,15 @@ image:res/Drawable.png[Sample app Drawable]
 = Links
 
 * link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[Getting Started]
+* link:https://github.com/garmin/connectiq-apps[Official ConnectIQ apps]
 * link:http://starttorun.info/connect-iq-apps-with-source-code/[Tutorial by example]
 * link:https://github.com/topics/connectiq[]
 * link:https://developer.garmin.com/downloads/connect-iq/Wearable-Programming-for-the-Active-Lifestyle.pdf[Book PDF]
+
+== Integrations
+
+* link:https://www.thisisant.com/resources/fit[FIT SDK]
+* link:https://developer.garmin.com/health-api/overview[Garmin Health API]
 
 == Apps
 
