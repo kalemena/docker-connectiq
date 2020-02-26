@@ -63,9 +63,6 @@ image:res/Drawable.png[Sample app Drawable]
 ====
     $ make eclipse
 
-.Keep default workspace location
-image:res/eclipse-workspace.png[]
-
 .Menu File => Import => Existing Projects into Workspace
 image:res/eclipse-import-project.png[]
 
