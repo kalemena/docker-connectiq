@@ -96,7 +96,7 @@ image:res/Drawable.png[Sample app Drawable]
 * Connect the watch using original cable
 * Wait for about 30s
 * Watch screen should show it is mounted and charging
-* In File explorer, see *GARMIN* device and browse to *GARMIN/apps*
+* In File explorer, see *GARMIN* device and browse to *GARMIN/APPS*
 * Copy *PRG* file built into this folder
 * Unmount *GARMIN* icon on watch
 * Watch should be showing *Verifying Connect IQ Apps*
@@ -130,6 +130,7 @@ image:res/Drawable.png[Sample app Drawable]
 * link:https://github.com/bombsimon/garmin-seaside[]
 * link:https://github.com/joshsamara/SlowWatch[]
 * link:https://github.com/vtrifonov-esfiddle/ConnectIQ-WatchTemperature[]
+* link:https://github.com/le-cds/connectiq[]
 
 == Eclipse
 

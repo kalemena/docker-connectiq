@@ -56,3 +56,12 @@ dkms.conf
 *.private
 *.der
 *.pem
+
+# Eclipse
+.eclipse
+.cache
+.simulator
+.p2
+.metadata
+.config
+.local
