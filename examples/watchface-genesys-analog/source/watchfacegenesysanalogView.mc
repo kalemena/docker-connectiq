@@ -9,6 +9,7 @@ using Toybox.Math as Math;
 class watchfacegenesysanalogView extends WatchUi.WatchFace {
 
     var lowPowerMode = false;
+    var timestamp = null;
     
     function initialize() {
         WatchFace.initialize();
@@ -28,14 +29,26 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
     // Update the view
     function onUpdate(dc) {
 		
-        View.onUpdate(dc);    
-        var width      = dc.getWidth();
-        var height     = dc.getHeight();
         var clockTime  = System.getClockTime();
-        var hour, min, sec;        
- 		var angleHour, angleMin, angleSec;
+         		
+ 		// lowPowerMode
+ 		if(lowPowerMode && timestamp != null && timestamp == clockTime.min) {
+ 			return;
+ 		} 		
+ 		timestamp = clockTime.min;
  		
-		hour = ((clockTime.hour % 12) * 60.0 + clockTime.min) / 60.0;        
+ 		refreshDisplay(dc, clockTime);		                
+    }
+    
+    function refreshDisplay(dc, clockTime) {
+    	// refresh
+ 		View.onUpdate(dc);
+ 		
+ 		var width      = dc.getWidth();
+        var height     = dc.getHeight();
+        var angleHour, angleMin, angleSec;
+ 		
+		var hour = ((clockTime.hour % 12) * 60.0 + clockTime.min) / 60.0;        
         angleHour = ((hour * 5.0) / 60.0) * Math.PI * 2;
         // System.println("Hours=" + hour + " => " + angleHour );
         angleMin = ( clockTime.min / 60.0) * Math.PI * 2;
@@ -47,20 +60,33 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
     	drawHand(dc, width/2, height/2, angleHour, 0, 45, 10, 7);
 		// minutes
     	drawHand(dc, width/2, height/2, angleMin, 0, 95, 7, 6);
-		
 		// seconds
 		if(!lowPowerMode)
  		{       
         	drawHandRound(dc, width/2, height/2, angleSec, 112, 5, 4);
         	// dc.fillCircle(width/2, height/2, 4);                         
-		}   		                
+		}
+    }
+    
+    function rotateAndDraw(dc, coords, cos, sin, centerX, centerY) {
+    	var coordsRotated = new [coords.size()];
+
+		for (var i = 0; i < coords.size(); i += 1)
+        {
+            var x = (coords[i][0] * cos) - (coords[i][1] * sin);
+            var y = (coords[i][0] * sin) + (coords[i][1] * cos);
+            coordsRotated[i] = [ centerX+x, centerY+y];
+        }
+        dc.fillPolygon(coordsRotated);
     }
 
     function drawHand(dc, centerX, centerY, angle, distIn, distOut, radius, width) {
 		
-		// arcs
+		// Math
 		var cos = Math.cos(angle);
 		var sin = Math.sin(angle);
+		
+		// 2 x Arcs		
 		var x1 = centerX + (distOut * sin);
         var y1 = centerY - (distOut * cos);
         var x2 = centerX + (distIn * sin);
@@ -73,35 +99,17 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
         dc.drawArc(x1, y1, radius, Graphics.ARC_CLOCKWISE, angleArcStart - 90, angleArcStart + 90);
         dc.drawArc(x2, y2, radius, Graphics.ARC_CLOCKWISE, angleArcStart + 90, angleArcStart + 270);
         
-        // bars (exterior in red)
+        // Circle
+        //drawHandRound(dc, centerX, centerY, angle, distOut, radius, width);
+        //drawHandRound(dc, centerX, centerY, angle, distIn, radius, width);
+        
+        // 2 x Bars
         var length = distOut-distIn+1;
-        var widthBar = radius + width/2;
-        var coords = [[widthBar, -distIn], [widthBar, -distIn-length], [-widthBar, -distIn-length], [-widthBar, -distIn]];
-        var result = new [coords.size()];
-
-		for (var i = 0; i < coords.size(); i += 1)
-        {
-            var x = (coords[i][0] * cos) - (coords[i][1] * sin);
-            var y = (coords[i][0] * sin) + (coords[i][1] * cos);
-            result[i] = [ centerX+x, centerY+y];
-        }
-        dc.fillPolygon(result);
+        var coords = [[radius + width/2, -distIn], [radius + width/2, -distIn-length], [radius - width/2, -distIn-length], [radius - width/2, -distIn]];
+        rotateAndDraw(dc, coords, cos, sin, centerX, centerY);
         
-        // bars (interior in background color)
-        dc.setColor(Application.getApp().getProperty("BackgroundColor"), Graphics.COLOR_TRANSPARENT); 
-        
-        length = distOut-distIn+1;
-        widthBar = radius - width/2;
-        coords = [[widthBar, -distIn], [widthBar, -distIn-length], [-widthBar, -distIn-length], [-widthBar, -distIn]];
-        result = new [coords.size()];
-
-		for (var i = 0; i < coords.size(); i += 1)
-        {
-            var x = (coords[i][0] * cos) - (coords[i][1] * sin);
-            var y = (coords[i][0] * sin) + (coords[i][1] * cos);
-            result[i] = [ centerX+x, centerY+y];
-        }
-        dc.fillPolygon(result);
+        coords = [[-radius + width/2, -distIn], [-radius + width/2, -distIn-length], [-radius - width/2, -distIn-length], [-radius - width/2, -distIn]];
+        rotateAndDraw(dc, coords, cos, sin, centerX, centerY);
     }
     
     function drawHandRound(dc, centerX, centerY, angle, dist, radius, width) {
@@ -131,9 +139,8 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
 	// Terminate any active timers and prepare for slow updates.
     function onEnterSleep() {
 	    lowPowerMode = true;
-	    WatchUi.requestUpdate();     
+	    WatchUi.requestUpdate();  
     }
-    
 
 }
 
