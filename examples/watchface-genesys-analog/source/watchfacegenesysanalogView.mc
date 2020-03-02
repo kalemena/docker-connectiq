@@ -9,7 +9,7 @@ using Toybox.Math as Math;
 class watchfacegenesysanalogView extends WatchUi.WatchFace {
 
     var lowPowerMode = false;
-    var timestamp = null;
+    var lowPowerModeMin = null; // minutes when low power mode got set
     
     function initialize() {
         WatchFace.initialize();
@@ -30,12 +30,16 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
     function onUpdate(dc) {
 		
         var clockTime  = System.getClockTime();
-         		
- 		// lowPowerMode
- 		if(lowPowerMode && timestamp != null && timestamp == clockTime.min) {
- 			return;
- 		} 		
- 		timestamp = clockTime.min;
+        
+ 		// refresh only every minute
+ 		if(lowPowerMode) {
+ 			if(lowPowerModeMin != null && lowPowerModeMin == clockTime.min) {
+ 				return;
+ 			}
+ 			lowPowerModeMin = clockTime.min;
+ 		} else {
+ 			lowPowerModeMin = null;
+ 		}	
  		
  		refreshDisplay(dc, clockTime);		                
     }
@@ -139,7 +143,7 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
 	// Terminate any active timers and prepare for slow updates.
     function onEnterSleep() {
 	    lowPowerMode = true;
-	    WatchUi.requestUpdate();  
+	    WatchUi.requestUpdate();
     }
 
 }
