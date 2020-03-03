@@ -1,5 +1,7 @@
 using Toybox.System;
 using Toybox.WatchUi;
+using Toybox.SensorHistory;
+using Toybox.Lang;
 using Toybox.Graphics;
 using Toybox.Time;
 using Toybox.Time.Gregorian as Calendar;
@@ -20,6 +22,16 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
     	setLayout(Rez.Layouts.WatchFace(dc));
     }
     
+    // Create a method to get the SensorHistoryIterator object
+	function getIterator() {
+	    // Check device for SensorHistory compatibility
+	    if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getTemperatureHistory)) {
+	        // Set up the method with parameters
+	        return Toybox.SensorHistory.getTemperatureHistory({});
+	    }
+	    return null;
+	}
+    
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
@@ -31,7 +43,7 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
 		
         var clockTime  = System.getClockTime();
         
- 		// refresh only every minute
+		// refresh only every minute
  		if(lowPowerMode) {
  			if(lowPowerModeMin != null && lowPowerModeMin == clockTime.min) {
  				return;
@@ -69,6 +81,21 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
  		{       
         	drawHandRound(dc, width/2, height/2, angleSec, 112, 5, 4);
         	// dc.fillCircle(width/2, height/2, 4);                         
+		}
+		
+		// Temperature
+		var sensorIter = getIterator();
+		if (sensorIter != null) {
+		    // System.println(sensorIter.next().data);
+		    dc.drawText(
+		        dc.getWidth() / 2 + 30,
+		        dc.getHeight() / 2 + 30,
+		        Graphics.FONT_LARGE,
+		        sensorIter.next().data.format("%02d"),
+		        Graphics.TEXT_JUSTIFY_CENTER
+		    );
+		    dc.setPenWidth(1);
+		    dc.drawCircle(dc.getWidth() / 2 + 45,dc.getHeight() / 2 + 40,2);
 		}
     }
     
