@@ -23,7 +23,7 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
     }
     
     // Create a method to get the SensorHistoryIterator object
-	function getIterator() {
+	function getIteratorTemperature() {
 	    // Check device for SensorHistory compatibility
 	    if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getTemperatureHistory)) {
 	        // Set up the method with parameters
@@ -75,7 +75,7 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
         // hour
     	drawHand(dc, width/2, height/2, angleHour, 0, 45, 10, 7);
 		// minutes
-    	drawHand(dc, width/2, height/2, angleMin, 0, 95, 7, 6);
+    	drawHand(dc, width/2, height/2, angleMin, 0, 80, 7, 6);
 		// seconds
 		if(!lowPowerMode)
  		{       
@@ -83,8 +83,9 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
         	// dc.fillCircle(width/2, height/2, 4);                         
 		}
 		
+		/*
 		// Temperature
-		var sensorIter = getIterator();
+		var sensorIter = getIteratorTemperature();
 		if (sensorIter != null) {
 		    // System.println(sensorIter.next().data);
 		    dc.drawText(
@@ -96,7 +97,21 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
 		    );
 		    dc.setPenWidth(1);
 		    dc.drawCircle(dc.getWidth() / 2 + 45,dc.getHeight() / 2 + 40,2);
-		}
+		}*/
+		
+		// Get the date and format it
+        var calendar = Calendar.info(Time.now(), Time.FORMAT_LONG);
+        var fullDateString = Lang.format("$1$, $2$ $3$", [calendar.day_of_week, calendar.month, calendar.day]);
+        //var dateString = Lang.format("$1$", [calendar.day]);
+        //System.println("Date=" + dateString );
+        
+        dc.drawText(
+	        dc.getWidth() / 2,
+	        dc.getHeight() / 2 + 85,
+	        Graphics.FONT_XTINY,
+	        fullDateString,
+	        Graphics.TEXT_JUSTIFY_CENTER
+	    );
     }
     
     function rotateAndDraw(dc, coords, cos, sin, centerX, centerY) {
