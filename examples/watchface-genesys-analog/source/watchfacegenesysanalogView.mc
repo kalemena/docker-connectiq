@@ -101,15 +101,15 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
 		
 		// Get the date and format it
         var calendar = Calendar.info(Time.now(), Time.FORMAT_LONG);
-        var fullDateString = Lang.format("$1$, $2$ $3$", [calendar.day_of_week, calendar.month, calendar.day]);
-        //var dateString = Lang.format("$1$", [calendar.day]);
+        //var dateString = Lang.format("$1$, $2$ $3$", [calendar.day_of_week, calendar.month, calendar.day]);
+        var dateString = Lang.format("$1$ $2$", [calendar.day_of_week, calendar.day]);
         //System.println("Date=" + dateString );
         
         dc.drawText(
 	        dc.getWidth() / 2,
 	        dc.getHeight() / 2 + 85,
 	        Graphics.FONT_XTINY,
-	        fullDateString,
+	        dateString,
 	        Graphics.TEXT_JUSTIFY_CENTER
 	    );
     }
