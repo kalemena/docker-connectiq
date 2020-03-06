@@ -22,20 +22,28 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
     	setLayout(Rez.Layouts.WatchFace(dc));
     }
     
-    // Create a method to get the SensorHistoryIterator object
-	function getIteratorTemperature() {
-	    // Check device for SensorHistory compatibility
-	    if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getTemperatureHistory)) {
-	        // Set up the method with parameters
-	        return Toybox.SensorHistory.getTemperatureHistory({});
-	    }
-	    return null;
-	}
-    
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
+    }
+    
+    // Called when this View is removed from the screen. Save the
+    // state of this View here. This includes freeing resources from
+    // memory.
+    function onHide() {
+    }
+
+	// The user has just looked at their watch. Timers and animations may be started here.
+    function onExitSleep() {
+	    lowPowerMode = false;
+	    WatchUi.requestUpdate();     
+    }
+
+	// Terminate any active timers and prepare for slow updates.
+    function onEnterSleep() {
+	    lowPowerMode = true;
+	    WatchUi.requestUpdate();
     }
     
     // Update the view
@@ -56,6 +64,16 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
  		refreshDisplay(dc, clockTime);		                
     }
     
+    // Create a method to get the SensorHistoryIterator object
+	function getIteratorTemperature() {
+	    // Check device for SensorHistory compatibility
+	    if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getTemperatureHistory)) {
+	        // Set up the method with parameters
+	        return Toybox.SensorHistory.getTemperatureHistory({});
+	    }
+	    return null;
+	}
+    
     function refreshDisplay(dc, clockTime) {
     	// refresh
  		View.onUpdate(dc);
@@ -73,9 +91,9 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
         // System.println("Seconds=" + clockTime.sec + " => " + angleSec + " = " + angleSec * 360 / (2 * Math.PI));
         
         // hour
-    	drawHand(dc, width/2, height/2, angleHour, 0, 45, 10, 7);
+    	drawHand(dc, width/2, height/2, angleHour, 0, 45, 10, 5);
 		// minutes
-    	drawHand(dc, width/2, height/2, angleMin, 0, 80, 7, 6);
+    	drawHand(dc, width/2, height/2, angleMin, 0, 80, 7, 4);
 		// seconds
 		if(!lowPowerMode)
  		{       
@@ -112,9 +130,13 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
 	        dateString,
 	        Graphics.TEXT_JUSTIFY_CENTER
 	    );
+	    
+	    // Battery
+        var x = (dc.getWidth() - 28)/2;
+	    drawBattery(dc, System.getSystemStats().battery, x, 18, 25, 10);	
     }
     
-    function rotateAndDraw(dc, coords, cos, sin, centerX, centerY) {
+    function drawWithRotate(dc, coords, cos, sin, centerX, centerY) {
     	var coordsRotated = new [coords.size()];
 
 		for (var i = 0; i < coords.size(); i += 1)
@@ -152,10 +174,10 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
         // 2 x Bars
         var length = distOut-distIn+1;
         var coords = [[radius + width/2, -distIn], [radius + width/2, -distIn-length], [radius - width/2, -distIn-length], [radius - width/2, -distIn]];
-        rotateAndDraw(dc, coords, cos, sin, centerX, centerY);
+        drawWithRotate(dc, coords, cos, sin, centerX, centerY);
         
         coords = [[-radius + width/2, -distIn], [-radius + width/2, -distIn-length], [-radius - width/2, -distIn-length], [-radius - width/2, -distIn]];
-        rotateAndDraw(dc, coords, cos, sin, centerX, centerY);
+        drawWithRotate(dc, coords, cos, sin, centerX, centerY);
     }
     
     function drawHandRound(dc, centerX, centerY, angle, dist, radius, width) {
@@ -170,22 +192,13 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
         dc.drawCircle(x,y,radius);        
     }
     
-    // Called when this View is removed from the screen. Save the
-    // state of this View here. This includes freeing resources from
-    // memory.
-    function onHide() {
-    }
-
-	// The user has just looked at their watch. Timers and animations may be started here.
-    function onExitSleep() {
-	    lowPowerMode = false;
-	    WatchUi.requestUpdate();     
-    }
-
-	// Terminate any active timers and prepare for slow updates.
-    function onEnterSleep() {
-	    lowPowerMode = true;
-	    WatchUi.requestUpdate();
+    function drawBattery(dc, batteryLevel, xStart, yStart, width, height) {                
+        dc.setPenWidth(1);
+        dc.drawRectangle(xStart, yStart, width, height);
+        dc.fillRectangle(xStart + width - 1, yStart + 2, 4, height - 5);   
+        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        //dc.drawText(xStart+width/2 , yStart+height/2, 0, format("$1$%", [batteryLevel.format("%d")]), Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+       	dc.fillRectangle(xStart + 1, yStart + 1, (width-2) * batteryLevel / 100, height - 2);
     }
 
 }
