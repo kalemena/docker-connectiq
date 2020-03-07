@@ -64,12 +64,19 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
  		refreshDisplay(dc, clockTime);		                
     }
     
-    // Create a method to get the SensorHistoryIterator object
+    // --- Sensor History ---
 	function getIteratorTemperature() {
 	    // Check device for SensorHistory compatibility
 	    if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getTemperatureHistory)) {
-	        // Set up the method with parameters
 	        return Toybox.SensorHistory.getTemperatureHistory({});
+	    }
+	    return null;
+	}
+	
+	function getIteratorHeartRate() {
+	    // Check device for SensorHistory compatibility
+	    if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getHeartRateHistory)) {
+	        return Toybox.SensorHistory.getHeartRateHistory({});
 	    }
 	    return null;
 	}
@@ -80,29 +87,40 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
  		
  		var width      = dc.getWidth();
         var height     = dc.getHeight();
+        
+        // --- TIME ---
         var angleHour, angleMin, angleSec;
- 		
-		var hour = ((clockTime.hour % 12) * 60.0 + clockTime.min) / 60.0;        
+ 		var hour = ((clockTime.hour % 12) * 60.0 + clockTime.min) / 60.0;        
         angleHour = ((hour * 5.0) / 60.0) * Math.PI * 2;
         // System.println("Hours=" + hour + " => " + angleHour );
         angleMin = ( clockTime.min / 60.0) * Math.PI * 2;
         // System.println("Minutes=" + clockTime.min + " => " + angleMin );
         angleSec = ( clockTime.sec / 60.0) * Math.PI * 2;
         // System.println("Seconds=" + clockTime.sec + " => " + angleSec + " = " + angleSec * 360 / (2 * Math.PI));
-        
-        // hour
-    	drawHand(dc, width/2, height/2, angleHour, 0, 45, 10, 5);
-		// minutes
-    	drawHand(dc, width/2, height/2, angleMin, 0, 80, 7, 4);
-		// seconds
-		if(!lowPowerMode)
- 		{       
-        	drawHandRound(dc, width/2, height/2, angleSec, 112, 5, 4);
-        	// dc.fillCircle(width/2, height/2, 4);                         
+    	drawHand(dc, width/2, height/2, angleHour, 0, 45, 10, 5); 	// hours
+    	drawHand(dc, width/2, height/2, angleMin, 0, 80, 7, 4);		// minutes
+		if(!lowPowerMode) {       
+        	drawHandRound(dc, width/2, height/2, angleSec, 112, 5, 4); // seconds
 		}
 		
+		// --- DATE ---
+        var calendar = Calendar.info(Time.now(), Time.FORMAT_LONG);
+        //var dateString = Lang.format("$1$, $2$ $3$", [calendar.day_of_week, calendar.month, calendar.day]);
+        var dateString = Lang.format("$1$ $2$", [calendar.day_of_week, calendar.day]);
+        dc.drawText(
+	        dc.getWidth() / 2,
+	        dc.getHeight() / 2 + 85,
+	        Graphics.FONT_XTINY,
+	        dateString,
+	        Graphics.TEXT_JUSTIFY_CENTER
+	    );
+	    
+	    // --- Battery ---
+        var x = (dc.getWidth() - 28)/2;
+	    drawBattery(dc, System.getSystemStats().battery, x, 18, 25, 10);
+	    	    		
 		/*
-		// Temperature
+		// --- Temperature ---
 		var sensorIter = getIteratorTemperature();
 		if (sensorIter != null) {
 		    // System.println(sensorIter.next().data);
@@ -116,24 +134,22 @@ class watchfacegenesysanalogView extends WatchUi.WatchFace {
 		    dc.setPenWidth(1);
 		    dc.drawCircle(dc.getWidth() / 2 + 45,dc.getHeight() / 2 + 40,2);
 		}*/
-		
-		// Get the date and format it
-        var calendar = Calendar.info(Time.now(), Time.FORMAT_LONG);
-        //var dateString = Lang.format("$1$, $2$ $3$", [calendar.day_of_week, calendar.month, calendar.day]);
-        var dateString = Lang.format("$1$ $2$", [calendar.day_of_week, calendar.day]);
-        //System.println("Date=" + dateString );
-        
-        dc.drawText(
-	        dc.getWidth() / 2,
-	        dc.getHeight() / 2 + 85,
-	        Graphics.FONT_XTINY,
-	        dateString,
-	        Graphics.TEXT_JUSTIFY_CENTER
-	    );
-	    
-	    // Battery
-        var x = (dc.getWidth() - 28)/2;
-	    drawBattery(dc, System.getSystemStats().battery, x, 18, 25, 10);	
+		/*
+		// --- HeartRate ---
+		var sensorIterHeartRate = getIteratorHeartRate();
+		if (sensorIterHeartRate != null) {
+		    //System.println(sensorIterHeartRate.next().data);
+		    dc.drawText(
+		        17,
+		        (dc.getHeight()-30) / 2,
+		        Graphics.FONT_XTINY,
+		        sensorIterHeartRate.next().data.format("%02d"),
+		        Graphics.TEXT_JUSTIFY_LEFT
+		    );
+		    //drawHand(dc, 25, height/2+15, 0.7, 0, 8, 3, 3);
+		    //drawHand(dc, 25, height/2+15, -0.7, 0, 8, 3, 3);
+		}
+		*/
     }
     
     function drawWithRotate(dc, coords, cos, sin, centerX, centerY) {
