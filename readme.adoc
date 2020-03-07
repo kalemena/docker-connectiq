@@ -135,6 +135,7 @@ image:res/Drawable.png[Sample app Drawable]
 * link:https://github.com/joshsamara/SlowWatch[]
 * link:https://github.com/vtrifonov-esfiddle/ConnectIQ-WatchTemperature[]
 * link:https://github.com/le-cds/connectiq[]
+* link:https://gist.github.com/jonathan-beebe/512b01bbcb6cd8f50a02e12cb74972f8[Progress bar]
 
 == Eclipse
 
