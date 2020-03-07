@@ -116,6 +116,10 @@ image:res/Drawable.png[Sample app Drawable]
 * link:https://www.thisisant.com/resources/fit[FIT SDK]
 * link:https://developer.garmin.com/health-api/overview[Garmin Health API]
 
+== Tips
+
+* link:https://developer.garmin.com/index.php/blog/post/connect-iq-pro-tip-custom-fonts-tricks[Font tips & tricks]
+
 == Apps
 
 * link:https://github.com/stynoo/docker-garmin-backup[]
