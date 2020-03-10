@@ -119,6 +119,7 @@ image:res/Drawable.png[Sample app Drawable]
 == Tips
 
 * link:https://developer.garmin.com/index.php/blog/post/connect-iq-pro-tip-custom-fonts-tricks[Font tips & tricks]
+* link:http://www.programmersought.com/article/8285579439/[Tips]
 
 == Apps
 
