@@ -66,3 +66,4 @@ dkms.conf
 .config
 .local
 .swt/trims.prefs
+.tooling/gradle/versions.json
