@@ -56,6 +56,7 @@ dkms.conf
 *.private
 *.der
 *.pem
+examples-other
 
 # Eclipse
 .eclipse
@@ -65,5 +66,5 @@ dkms.conf
 .metadata
 .config
 .local
-.swt/trims.prefs
-.tooling/gradle/versions.json
+.swt
+.tooling
