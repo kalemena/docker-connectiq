@@ -1,4 +1,4 @@
-cmp_developerKey=/workspace/developer_key.der
+cmp_developerKey=/home/developer/eclipse-workspace/developer_key.der
 eclipse.preferences.version=1
 logging_log_file_location=/tmp/GARMIN/plugin.log
 notification_one_time_warning=true

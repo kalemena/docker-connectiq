@@ -63,8 +63,8 @@ examples-other
 .cache
 .simulator
 .p2
-.metadata
 .config
 .local
 .swt
 .tooling
+.metadata
