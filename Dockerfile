@@ -24,6 +24,7 @@ RUN apt-get update -y && \
     apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
 RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
     cd /opt && \
     wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-${VERSION}.zip -O ciq.zip && \
