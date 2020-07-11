@@ -11,7 +11,7 @@ jobs:
         VERSION: "3.1.8-2020-03-04-e5981d10b"
       run: |
         docker -v
-        docker pull ubuntu:16.04
+        docker pull ubuntu:18.04
         docker pull ${IMAGE}:${VERSION} || true
         docker build --pull --cache-from ${IMAGE}:${VERSION} \
           -t ${IMAGE}:${VERSION} \
