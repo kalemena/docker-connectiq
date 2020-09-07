@@ -52,7 +52,7 @@ For persistence reasons, any file or created project should be done in */workspa
 ====
     $ make console
     $$ cd /opt/ciq/samples/Drawable/
-    $$ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y /workspace/developer_key.der
+    $$ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y ~/eclipse-workspace/developer_key.der
     $$ connectiq &
     $$ monkeydo drawable.prg vivoactive3
 
