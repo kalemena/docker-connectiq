@@ -4,7 +4,6 @@ image:https://github.com/kalemena/docker-connectiq/workflows/Pipeline/badge.svg[
 image:https://img.shields.io/docker/v/kalemena/connectiq[Docker Hub, link=https://hub.docker.com/r/kalemena/connectiq/tags]
 image:https://img.shields.io/docker/pulls/kalemena/connectiq.svg[Docker Hub, link=https://hub.docker.com/r/kalemena/connectiq/tags]
 image:https://img.shields.io/docker/image-size/kalemena/connectiq[Docker Hub, link=https://hub.docker.com/r/kalemena/connectiq/tags]
-image:https://images.microbadger.com/badges/version/kalemena/connectiq.svg[Docker Version, link=https://microbadger.com/images/kalemena/connectiq]
 endif::[]
 
 ifdef::env-github[]
