@@ -1,0 +1,6 @@
+= Example - Analog Watchface
+
+Very basic mathematics for a Genesys-style analog watchface.
+
+image:docs/watchface.png[]
+
