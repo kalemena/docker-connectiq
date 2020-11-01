@@ -23,8 +23,8 @@ ENV CONNECT_IQ_SDK_URL https://developer.garmin.com/downloads/connect-iq
 
 # Compiler tools
 RUN apt-get update -y && \
-    apt-get install -qqy openjdk-11-jdk && \
-    apt-get install -qqy unzip wget curl git ssh tar gzip ca-certificates libusb-1.0 libpng16-16 libgtk2.0-0 libwebkitgtk-1.0-0 libwebkitgtk-3.0-0 && \
+    apt-get install --no-install-recommends -qqy openjdk-11-jdk && \
+    apt-get install --no-install-recommends -qqy unzip wget curl git ssh tar gzip ca-certificates libusb-1.0 libpng16-16 libgtk2.0-0 libwebkitgtk-1.0-0 libwebkitgtk-3.0-0 && \
     apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
