@@ -16,18 +16,21 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0"
 
 ENV LANG C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
+ENV CONNECT_IQ_SDK_URL https://developer.garmin.com/downloads/connect-iq
 
 # Compiler tools
 RUN apt-get update -y && \
     apt-get install -qqy openjdk-11-jdk && \
-    apt-get install -qqy unzip wget git ssh tar gzip ca-certificates libusb-1.0 libpng16-16 libgtk2.0-0 libwebkitgtk-1.0-0 libwebkitgtk-3.0-0 && \
+    apt-get install -qqy unzip wget curl git ssh tar gzip ca-certificates libusb-1.0 libpng16-16 libgtk2.0-0 libwebkitgtk-1.0-0 libwebkitgtk-3.0-0 && \
     apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
 RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
     cd /opt && \
-    wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-${VERSION}.zip -O ciq.zip && \
+    curl -LsS -o ciq.zip ${CONNECT_IQ_SDK_URL}/sdks/connectiq-sdk-lin-${VERSION}.zip && \
     unzip ciq.zip -d ciq && \
     rm -f ciq.zip
 
@@ -41,12 +44,13 @@ RUN wget ${ECLIPSE_DOWNLOAD_URL} -O /tmp/eclipse.tar.gz -q && \
     tar -xf /tmp/eclipse.tar.gz -C /opt && \
     rm /tmp/eclipse.tar.gz
 # Eclipse IDE plugins
-RUN cd /opt/eclipse && \
+RUN echo "Installing Connect IQ Eclipse Plugins" && \ 
+    cd /opt/eclipse && \
     ./eclipse -clean -application org.eclipse.equinox.p2.director -noSplash \
-              -repository https://developer.garmin.com/downloads/connect-iq/eclipse/ \
+              -repository ${CONNECT_IQ_SDK_URL}/eclipse/ \
               -installIU connectiq.feature.ide.feature.group/ && \
     ./eclipse -clean -application org.eclipse.equinox.p2.director -noSplash \
-              -repository https://developer.garmin.com/downloads/connect-iq/eclipse/ \
+              -repository ${CONNECT_IQ_SDK_URL}/eclipse/ \
               -installIU connectiq.feature.sdk.feature.group/
 
 # Few prefs
@@ -64,8 +68,9 @@ USER developer
 ENV HOME /home/developer
 WORKDIR /home/developer
 
-ENV CIQ_HOME /opt/ciq/bin
-ENV PATH ${PATH}:${CIQ_HOME}:/opt/eclipse
+ENV ECLIPSE_HOME    /opt/eclipse
+ENV CIQ_HOME        /opt/ciq/bin
+ENV PATH ${PATH}:${CIQ_HOME}:${ECLIPSE_HOME}
 
 # CMD [ "/opt/eclipse/eclipse" ]
 CMD [ "/bin/bash" ]
