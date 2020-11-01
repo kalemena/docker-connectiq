@@ -24,7 +24,7 @@ ENV CONNECT_IQ_SDK_URL https://developer.garmin.com/downloads/connect-iq
 # Compiler tools
 RUN apt-get update -y && \
     apt-get install --no-install-recommends -qqy openjdk-11-jdk && \
-    apt-get install --no-install-recommends -qqy unzip wget curl git ssh tar gzip ca-certificates libusb-1.0 libpng16-16 libgtk2.0-0 libwebkitgtk-1.0-0 libwebkitgtk-3.0-0 && \
+    apt-get install --no-install-recommends -qqy unzip wget curl git ssh tar gzip tzdata ca-certificates gnupg2 libusb-1.0 libpng16-16 libgtk2.0-0 libwebkitgtk-1.0-0 libwebkitgtk-3.0-0 libgtk-3-0 && \
     apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -38,7 +38,7 @@ RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
 RUN ln -s /usr/lib/x86_64-linux-gnu/libpng16.so.16 /usr/lib/x86_64-linux-gnu/libpng12.so.0
 
 # Install Eclipse IDE
-ENV ECLIPSE_VERSION         2019-12/R/eclipse-java-2019-12-R-linux-gtk-x86_64.tar.gz
+ENV ECLIPSE_VERSION         2020-09/R/eclipse-java-2020-09-R-linux-gtk-x86_64.tar.gz
 ENV ECLIPSE_DOWNLOAD_URL    https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${ECLIPSE_VERSION}&r=1
 RUN curl -LsS -o eclipse.tar.gz "${ECLIPSE_DOWNLOAD_URL}" && \
     echo "Installing eclipse JavaEE ${ECLIPSE_DOWNLOAD_URL}" && \
