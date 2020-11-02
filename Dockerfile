@@ -38,11 +38,13 @@ RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
 RUN ln -s /usr/lib/x86_64-linux-gnu/libpng16.so.16 /usr/lib/x86_64-linux-gnu/libpng12.so.0
 
 # Install Eclipse IDE
-ENV ECLIPSE_DOWNLOAD_URL=http://ftp.fau.de/eclipse/technology/epp/downloads/release/2019-12/R/eclipse-java-2019-12-R-linux-gtk-x86_64.tar.gz
-RUN wget ${ECLIPSE_DOWNLOAD_URL} -O /tmp/eclipse.tar.gz -q && \
+ENV ECLIPSE_VERSION         2019-12/R/eclipse-java-2019-12-R-linux-gtk-x86_64.tar.gz
+ENV ECLIPSE_DOWNLOAD_URL    https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${ECLIPSE_VERSION}&r=1
+RUN curl -LsS -o eclipse.tar.gz "${ECLIPSE_DOWNLOAD_URL}" && \
     echo "Installing eclipse JavaEE ${ECLIPSE_DOWNLOAD_URL}" && \
-    tar -xf /tmp/eclipse.tar.gz -C /opt && \
-    rm /tmp/eclipse.tar.gz
+    tar -C /opt -xf eclipse.tar.gz && \
+    rm -rf eclipse.tar.gz
+
 # Eclipse IDE plugins
 RUN echo "Installing Connect IQ Eclipse Plugins" && \ 
     cd /opt/eclipse && \
