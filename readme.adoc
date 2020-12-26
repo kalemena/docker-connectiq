@@ -104,7 +104,7 @@ image:res/Drawable.png[Sample app Drawable]
 * Swipe up or down, the app should be visible
 ====
 
-= Links
+== Links
 
 * link:https://developer.garmin.com/connect-iq/programmers-guide/getting-started[Getting Started]
 * link:https://github.com/garmin/connectiq-apps[Official ConnectIQ apps]
@@ -112,17 +112,17 @@ image:res/Drawable.png[Sample app Drawable]
 * link:https://github.com/topics/connectiq[]
 * link:https://developer.garmin.com/downloads/connect-iq/Wearable-Programming-for-the-Active-Lifestyle.pdf[Book PDF]
 
-== Integrations
+=== Integrations
 
 * link:https://www.thisisant.com/resources/fit[FIT SDK]
 * link:https://developer.garmin.com/health-api/overview[Garmin Health API]
 
-== Tips
+=== Tips
 
 * link:https://developer.garmin.com/index.php/blog/post/connect-iq-pro-tip-custom-fonts-tricks[Font tips & tricks]
 * link:http://www.programmersought.com/article/8285579439/[Tips]
 
-== Apps
+=== Apps
 
 * link:https://github.com/stynoo/docker-garmin-backup[]
 * link:https://github.com/blaskovicz/garmin-nest-camera-control[]
@@ -139,6 +139,6 @@ image:res/Drawable.png[Sample app Drawable]
 * link:https://github.com/le-cds/connectiq[]
 * link:https://gist.github.com/jonathan-beebe/512b01bbcb6cd8f50a02e12cb74972f8[Progress bar]
 
-== Eclipse
+=== Eclipse
 
 * link:https://github.com/qperez/docker-eclipse-mt-jdk8[Running Eclipse from Mac]
