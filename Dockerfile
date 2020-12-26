@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -20,6 +20,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
 ENV CONNECT_IQ_SDK_URL https://developer.garmin.com/downloads/connect-iq
+
+# libwebkitgtk-1.0-0
+RUN echo "deb http://cz.archive.ubuntu.com/ubuntu bionic main universe" >> /etc/apt/sources.list
 
 # Compiler tools
 RUN apt-get update -y && \
