@@ -1,3 +1,4 @@
+= docker-connectiq
 
 ifdef::env-github[]
 image:https://github.com/kalemena/docker-connectiq/workflows/Pipeline/badge.svg[GitHub Build]
@@ -13,8 +14,6 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
-
-= docker-connectiq
 
 Installation of Garmin Tools Connect IQ SDK and Eclipse IDE plugins as a Docker container.
 

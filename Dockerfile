@@ -41,7 +41,7 @@ RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
 RUN ln -s /usr/lib/x86_64-linux-gnu/libpng16.so.16 /usr/lib/x86_64-linux-gnu/libpng12.so.0
 
 # Install Eclipse IDE
-ENV ECLIPSE_VERSION         2020-09/R/eclipse-java-2020-09-R-linux-gtk-x86_64.tar.gz
+ENV ECLIPSE_VERSION         2021-03/R/eclipse-java-2021-03-R-linux-gtk-x86_64.tar.gz
 ENV ECLIPSE_DOWNLOAD_URL    https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${ECLIPSE_VERSION}&r=1
 RUN curl -LsS -o eclipse.tar.gz "${ECLIPSE_DOWNLOAD_URL}" && \
     echo "Installing eclipse JavaEE ${ECLIPSE_DOWNLOAD_URL}" && \
