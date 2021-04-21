@@ -1,6 +1,6 @@
 
-# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
-VERSION := 3.1.9-2020-06-24-1cc9d3a70
+# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.json
+VERSION := 3.2.5-2021-02-12-6d31f4357
 
 all: build 
 

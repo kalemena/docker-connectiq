@@ -18,7 +18,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
+# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.json
 ENV CONNECT_IQ_SDK_URL https://developer.garmin.com/downloads/connect-iq
 
 # libwebkitgtk-1.0-0
