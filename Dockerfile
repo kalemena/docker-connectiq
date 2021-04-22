@@ -18,7 +18,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
+# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.json
 ENV CONNECT_IQ_SDK_URL https://developer.garmin.com/downloads/connect-iq
 
 # libwebkitgtk-1.0-0
@@ -31,11 +31,15 @@ RUN apt-get update -y && \
     apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
+RUN echo "Downloading Connect IQ SDK: ${VERSION} from ${CONNECT_IQ_SDK_URL}/sdks/connectiq-sdk-lin-${VERSION}.zip" && \
     cd /opt && \
     curl -LsS -o ciq.zip ${CONNECT_IQ_SDK_URL}/sdks/connectiq-sdk-lin-${VERSION}.zip && \
     unzip ciq.zip -d ciq && \
     rm -f ciq.zip
+
+# fetched devices for 4.0.1
+RUN mkdir -p /home/developer/.Garmin/ConnectIQ/Devices/
+ADD devices.tar.xz /home/developer/.Garmin/ConnectIQ/Devices/
 
 # Fix missing libpng12 (monkeydo)
 RUN ln -s /usr/lib/x86_64-linux-gnu/libpng16.so.16 /usr/lib/x86_64-linux-gnu/libpng12.so.0

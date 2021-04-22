@@ -1,6 +1,6 @@
 
-# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
-VERSION := 3.1.9-2020-06-24-1cc9d3a70
+# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.json
+VERSION := 4.0.1-2021-04-16-d9c4c2c97
 
 all: build 
 
@@ -17,4 +17,4 @@ console:
 	bash ./run.sh
 
 eclipse:
-	COMMAND=/opt/eclipse/eclipse bash ./run.sh
+	COMMAND=/opt/eclipse/eclipse CIQ_WORKSPACE=/home/menny/dev/menny bash ./run.sh
