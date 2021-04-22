@@ -37,6 +37,10 @@ RUN echo "Downloading Connect IQ SDK: ${VERSION} from ${CONNECT_IQ_SDK_URL}/sdks
     unzip ciq.zip -d ciq && \
     rm -f ciq.zip
 
+# fetched devices for 4.0.1
+RUN mkdir -p /home/developer/.Garmin/ConnectIQ/Devices/
+ADD devices.tar.xz /home/developer/.Garmin/ConnectIQ/Devices/
+
 # Fix missing libpng12 (monkeydo)
 RUN ln -s /usr/lib/x86_64-linux-gnu/libpng16.so.16 /usr/lib/x86_64-linux-gnu/libpng12.so.0
 
