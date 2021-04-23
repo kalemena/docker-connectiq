@@ -68,3 +68,7 @@ examples-other
 .swt
 .tooling
 .metadata
+
+# Garmin
+.Garmin/ConnectIQ/Fonts
+.Garmin/ConnectIQ/Devices
