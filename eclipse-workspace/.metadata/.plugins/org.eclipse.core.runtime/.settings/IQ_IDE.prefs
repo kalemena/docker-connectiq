@@ -1,5 +1,8 @@
 cmp_developerKey=/home/developer/eclipse-workspace/developer_key.der
 eclipse.preferences.version=1
+iq_sdk_manager_path=/opt/ciq/bin/sdkmanager
+iq_sdk_manager_sets_sdk_manager_path=false
+iq_sdk_manager_sets_sdk_path=false
 logging_log_file_location=/tmp/GARMIN/plugin.log
 notification_one_time_warning=true
 notification_show_popup=true

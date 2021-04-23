@@ -18,7 +18,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.xml
+# Check at https://developer.garmin.com/downloads/connect-iq/sdks/sdks.json
+#          https://developer.garmin.com/downloads/connect-iq/sdk-manager/sdk-manager.json
 ENV CONNECT_IQ_SDK_URL https://developer.garmin.com/downloads/connect-iq
 
 # libwebkitgtk-1.0-0
@@ -36,6 +37,12 @@ RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
     curl -LsS -o ciq.zip ${CONNECT_IQ_SDK_URL}/sdks/connectiq-sdk-lin-${VERSION}.zip && \
     unzip ciq.zip -d ciq && \
     rm -f ciq.zip
+
+RUN echo "Downloading Connect IQ SDK Manager:" && \
+    cd /opt && \
+    curl -LsS -o ciq-sdk-manager.zip ${CONNECT_IQ_SDK_URL}/sdk-manager/connectiq-sdk-manager-linux.zip && \
+    unzip ciq-sdk-manager.zip -d ciq && \
+    rm -f ciq-sdk-manager.zip
 
 # Fix missing libpng12 (monkeydo)
 RUN ln -s /usr/lib/x86_64-linux-gnu/libpng16.so.16 /usr/lib/x86_64-linux-gnu/libpng12.so.0
