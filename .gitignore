@@ -72,3 +72,4 @@ examples-other
 # Garmin
 .Garmin/ConnectIQ/Fonts
 .Garmin/ConnectIQ/Devices
+.Garmin/ConnectIQ/Sdks
