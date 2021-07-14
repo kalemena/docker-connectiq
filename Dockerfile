@@ -76,6 +76,9 @@ RUN mkdir -p /home/developer && \
     chown developer:developer -R /home/developer && \
     chown developer:developer -R /opt
 
+# RUN apt-get update && \
+#     apt-get install -y wireshark tcpdump net-tools 
+
 USER developer
 ENV HOME /home/developer
 WORKDIR /home/developer
