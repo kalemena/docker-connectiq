@@ -33,8 +33,12 @@ Docker image is available through docker hub as link:https://hub.docker.com/r/ka
 
 [TIP]
 ====
-Command lines *run.sh*, *make console*, or *make eclipse* will map current folder into */workspace* of the container instance. +
-For persistence reasons, any file or created project should be done in */workspace* folder.
+Command lines *make console*, or *make eclipse* will map folders:
+- CIQ_WORKSPACE=./eclipse-workspace
+- CIQ_BINARIES=./.Garmin
+- EXAMPLES_FOLDER=./examples
+
+For persistence reasons, files created in eclipse or console should be done in these folders.
 ====
 
 === Generate a certificate
