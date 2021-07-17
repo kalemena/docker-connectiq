@@ -13,7 +13,7 @@ jobs:
     - name: Build Docker Image
       env:
         IMAGE: "kalemena/connectiq"
-        VERSION: "4.0.4-2021-07-01-9df386fcd7"
+        VERSION: "4.0.5-2021-08-10-29788b0dc"
       run: |
         docker -v
         docker pull ubuntu:20.04
