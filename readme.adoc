@@ -62,6 +62,15 @@ For persistence reasons, files created in eclipse or console should be done in t
 image:res/Drawable.png[Sample app Drawable]
 ====
 
+=== Preparing Eclipse IDE
+
+====
+    $ make eclipse
+
+.Menu Connect IQ => Open SDK Manager => Download your SDK version(s) and prefered Device(s)
+image:res/eclipse-connectiq-sdk-manager.png[]
+====
+
 === Building app in Eclipse IDE
 
 ====
