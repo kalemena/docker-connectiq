@@ -1,4 +1,5 @@
 = docker-connectiq
+:hardbreaks:
 
 ifdef::env-github[]
 image:https://github.com/kalemena/docker-connectiq/workflows/Pipeline/badge.svg[GitHub Build]
@@ -34,6 +35,7 @@ Docker image is available through docker hub as link:https://hub.docker.com/r/ka
 [TIP]
 ====
 Command lines *make console*, or *make eclipse* will map folders:
+
 - CIQ_WORKSPACE=./eclipse-workspace
 - CIQ_BINARIES=./.Garmin
 - EXAMPLES_FOLDER=./examples
