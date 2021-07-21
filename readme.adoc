@@ -43,13 +43,10 @@ Command lines *make console*, or *make eclipse* will map folders:
 For persistence reasons, files created in eclipse or console should be done in these folders.
 ====
 
-=== Generate a certificate
+=== Connect IQ certificate
 
-====
-    $ make console
-    $$ cd /workspace
-    $$ ./generate-certificate.sh    
-====
+Certificate is generated automatically if it does not exists under home folder *${CIQ_WORKSPACE}/developer_key.pem*.
+This logic is part of *./run.sh*.
 
 === Building app in Console
 
