@@ -32,6 +32,7 @@ RUN apt-get update -y && \
     apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# (optional) if .Garmin folder is mounted at runtime, SDK install is not required
 RUN echo "Downloading Connect IQ SDK: ${VERSION}" && \
     cd /opt && \
     curl -LsS -o ciq.zip ${CONNECT_IQ_SDK_URL}/sdks/connectiq-sdk-lin-${VERSION}.zip && \
