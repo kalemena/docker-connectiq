@@ -85,8 +85,8 @@ ENV HOME /home/developer
 WORKDIR /home/developer
 
 ENV ECLIPSE_HOME    /opt/eclipse
-ENV CIQ_HOME        /opt/ciq/bin
-ENV PATH ${PATH}:${CIQ_HOME}:${ECLIPSE_HOME}
+ENV CIQ_HOME        /opt/ciq
+ENV PATH ${PATH}:${CIQ_HOME}/bin:${ECLIPSE_HOME}
 
 # CMD [ "/opt/eclipse/eclipse" ]
 CMD [ "/bin/bash" ]
