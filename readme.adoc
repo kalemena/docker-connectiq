@@ -52,7 +52,7 @@ This logic is part of *./run.sh*.
 
 ====
     $ make console
-    $$ cd /opt/ciq/samples/Drawable/
+    $$ cd ${CIQ_HOME}/samples/Drawable/
     $$ monkeyc -d vivoactive3 -f ./monkey.jungle -o drawable.prg -y ~/eclipse-workspace/developer_key.der
     $$ connectiq &
     $$ monkeydo drawable.prg vivoactive3
