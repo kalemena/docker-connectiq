@@ -66,8 +66,14 @@ image:res/Drawable.png[Sample app Drawable]
 ====
     $ make eclipse
 
-.Menu Connect IQ => Open SDK Manager => Download your SDK version(s) and prefered Device(s)
-image:res/eclipse-connectiq-sdk-manager.png[]
+.Menu Connect IQ => Open SDK Manager => Login to Garmin Connect IQ to allow downloads of device(s)
+image:res/eclipse-connectiq-sdk-manager-Login.png[]
+
+.Menu Connect IQ => Open SDK Manager => Download your SDK version(s)
+image:res/eclipse-connectiq-sdk-manager-SDK.png[]
+
+.Menu Connect IQ => Open SDK Manager => Download your prefered Device(s)
+image:res/eclipse-connectiq-sdk-manager-Devices.png[]
 ====
 
 === Building app in Eclipse IDE
