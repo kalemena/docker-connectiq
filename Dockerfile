@@ -70,15 +70,11 @@ RUN echo "Installing Connect IQ Eclipse Plugins" && \
 ADD [ "eclipse-workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/IQ_IDE.prefs", "/home/developer/eclipse-workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/IQ_IDE.prefs" ]
 ADD [ "org.eclipse.ui.ide.prefs", "/opt/eclipse/configuration/.settings/org.eclipse.ui.ide.prefs" ]
 
-# USER developer as 1000
+# Set user=1000 and group=0 as the owner of all files under /home/developer
 RUN mkdir -p /home/developer && \
     echo "developer:x:1000:1000:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
-    echo "developer:x:1000:" >> /etc/group && \
-    chown developer:developer /home/developer && chmod -R g+rwX /home/developer && \
-    chown -R developer:developer /opt && chmod -R g+rwX /opt
-
-# RUN apt-get update && \
-#     apt-get install -y wireshark tcpdump net-tools 
+    chown -R 1000:0 /home/developer && chmod -R ug+rw /home/developer && \
+    chown -R 1000:0 /opt && chmod -R ug+rw /opt
 
 USER developer
 ENV HOME /home/developer
