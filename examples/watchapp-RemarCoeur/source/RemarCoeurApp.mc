@@ -17,7 +17,9 @@ class RemarCoeurApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {
-        return [ new RemarCoeurView(), new RemarCoeurDelegate() ];
+    	var view = new RemarCoeurView();
+    	var delegate = new RemarCoeurDelegate(view);
+        return [ view, delegate ];
     }
 
 }

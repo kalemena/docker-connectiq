@@ -4,7 +4,17 @@ using Toybox.SensorHistory;
 
 class RemarCoeurView extends WatchUi.View {
 
-	private var mTemperature;
+	hidden var mIndex = 0;
+    hidden var mSensorSymbols = [:getHeartRateHistory,
+                                 :getTemperatureHistory,
+                                 :getPressureHistory,
+                                 :getElevationHistory ];
+    hidden var mSensorLabel = ["Heart",
+                               "Temp",
+                               "Pressure",
+                               "Elevation" ];
+
+	private var mSensorValues = [ 0, 0, 0, 0 ];
 
     function initialize() {
         View.initialize();
@@ -19,16 +29,25 @@ class RemarCoeurView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
-    	me.mTemperature = "0";
+    	for(var i = 0; i < 4; i += 1) {
+    		me.mSensorValues[i] = "0";
+    	}
+    	
 		var myTimer = new Timer.Timer();
-    	myTimer.start(method(:onRefreshTempSensor), 1000, true);
+    	myTimer.start(method(:onRefreshSensor), 1000, true);
     }
 
     // Update the view
     function onUpdate(dc) {
         // Call the parent onUpdate function to redraw the layout
-        var output = View.findDrawableById("output");
-        output.setText(me.mTemperature);
+        for(var i = 0; i < 4; i += 1) {
+        	var fieldTemplate = "output$1$";
+			var myParams = [i];
+			var fieldName = Lang.format(fieldTemplate, myParams);
+    	
+	        var output = View.findDrawableById(fieldName);
+	        output.setText(mSensorLabel[i] + " " + me.mSensorValues[i]);
+        }
         
         View.onUpdate(dc);
     }
@@ -39,22 +58,37 @@ class RemarCoeurView extends WatchUi.View {
     function onHide() {
     }
 
-	private function getLatestTemperatureHistory() {
-    	if ((Toybox has :SensorHistory) && (SensorHistory has :getTemperatureHistory)) {
-	        var temperatureHistory = SensorHistory.getTemperatureHistory({:period =>10, :order => SensorHistory.ORDER_NEWEST_FIRST});
-	        return temperatureHistory.next().data;
-	    }
+	private function getLatestSensorHistory(index) {
+		if ( ( Toybox has :SensorHistory ) && ( Toybox.SensorHistory has mSensorSymbols[index] ) ) {
+            var getMethod = new Lang.Method( Toybox.SensorHistory, mSensorSymbols[index] );
+            var sensorHistory = getMethod.invoke( {:period =>10, :order => SensorHistory.ORDER_NEWEST_FIRST} );
+	        return sensorHistory.next().data;
+        }
+	
 	    return null;
     }
     
-    function onRefreshTempSensor() {
-    	var temperature = me.getLatestTemperatureHistory();
-		if (temperature == null) {
-    		me.mTemperature = "0";
-    	}    		
-    	else {			
-    		me.mTemperature =  temperature.format("%4.2f");
-    	}
+    function onRefreshSensor() {
+    	for(var i = 0; i < 4; i += 1) {
+		    var sensorValue = me.getLatestSensorHistory(i);
+			if (sensorValue == null) {
+	    		me.mSensorValues[i] = "0";
+	    	}    		
+	    	else {			
+	    		me.mSensorValues[i] =  sensorValue.format("%4.2f");
+	    	}
+		}
+    	
     	WatchUi.requestUpdate();
+    }
+    
+    function nextSensor() {
+        mIndex += 1;
+        mIndex %= 4;
+    }
+
+    function previousSensor() {
+        mIndex += 3;
+        mIndex %= 4;
     }
 }
