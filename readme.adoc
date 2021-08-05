@@ -127,7 +127,7 @@ image:res/Drawable.png[Sample app Drawable]
 * link:https://github.com/garmin/connectiq-apps[Official ConnectIQ apps]
 * link:http://starttorun.info/connect-iq-apps-with-source-code/[Tutorial by example]
 * link:https://github.com/topics/connectiq[]
-* link:https://developer.garmin.com/downloads/connect-iq/Wearable-Programming-for-the-Active-Lifestyle.pdf[Book PDF]
+* link:https://developer.garmin.com/downloads/connect-iq/wearable-programming-for-the-active-lifestyle.pdf[Book PDF]
 
 === Integrations
 
