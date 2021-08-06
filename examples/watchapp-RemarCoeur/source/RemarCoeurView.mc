@@ -17,8 +17,10 @@ class RemarCoeurView extends WatchUi.View {
                                
     hidden var mSensorMetric = ["bpm",
                                "°C",
-                               "?",
+                               "hPa",
                                "m" ];
+                               
+    hidden var mSensorFactor = [1, 1, 0.01, 1 ];
 
 	private var mSensorValues = [ 0, 0, 0, 0 ];
 
@@ -80,10 +82,12 @@ class RemarCoeurView extends WatchUi.View {
     
     	for(var i = 0; i < 4; i += 1) {
 		    var sensorValue = me.getLatestSensorHistory(i);
+		    
 			if (sensorValue == null) {
 	    		me.mSensorValues[i] = "0";
 	    	}    		
-	    	else {			
+	    	else {
+	    		sensorValue = sensorValue * mSensorFactor[i];			
 	    		me.mSensorValues[i] =  sensorValue.format("%4.2f");
 	    	}
 		}
