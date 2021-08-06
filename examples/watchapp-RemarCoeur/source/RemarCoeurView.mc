@@ -9,10 +9,16 @@ class RemarCoeurView extends WatchUi.View {
                                  :getTemperatureHistory,
                                  :getPressureHistory,
                                  :getElevationHistory ];
+                                 
     hidden var mSensorLabel = ["Heart",
                                "Temp",
                                "Pressure",
                                "Elevation" ];
+                               
+    hidden var mSensorMetric = ["bpm",
+                               "°C",
+                               "?",
+                               "m" ];
 
 	private var mSensorValues = [ 0, 0, 0, 0 ];
 
@@ -34,7 +40,7 @@ class RemarCoeurView extends WatchUi.View {
     	}
     	
 		var myTimer = new Timer.Timer();
-    	myTimer.start(method(:onRefreshSensor), 1000, true);
+    	myTimer.start(method(:onRefreshSensor), 5000, true);
     }
 
     // Update the view
@@ -46,7 +52,8 @@ class RemarCoeurView extends WatchUi.View {
 			var fieldName = Lang.format(fieldTemplate, myParams);
     	
 	        var output = View.findDrawableById(fieldName);
-	        output.setText(mSensorLabel[i] + " " + me.mSensorValues[i]);
+	        // mSensorLabel[i]
+	        output.setText(me.mSensorValues[i] + " " + mSensorMetric[i]);
         }
         
         View.onUpdate(dc);
@@ -69,6 +76,8 @@ class RemarCoeurView extends WatchUi.View {
     }
     
     function onRefreshSensor() {
+    	// System.println(".");
+    
     	for(var i = 0; i < 4; i += 1) {
 		    var sensorValue = me.getLatestSensorHistory(i);
 			if (sensorValue == null) {
