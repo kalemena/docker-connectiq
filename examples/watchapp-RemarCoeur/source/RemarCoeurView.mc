@@ -1,6 +1,7 @@
 using Toybox.WatchUi;
 using Toybox.Lang;
 using Toybox.SensorHistory;
+using Toybox.Graphics as Gfx;
 
 class RemarCoeurView extends WatchUi.View {
 
@@ -33,9 +34,7 @@ class RemarCoeurView extends WatchUi.View {
         setLayout(Rez.Layouts.MainLayout(dc));
     }
 
-	function draw() {
-		// dc.setColor(Gfx.COLOR_BLUE, Gfx.COLOR_WHITE);
-		// dc.fillRectangle(0, 0, widthX, widthY);
+	function draw(dc) {
 		
 		for(var i = 0; i < 4; i += 1) {
         	var fieldTemplate = "output$1$";
@@ -58,7 +57,7 @@ class RemarCoeurView extends WatchUi.View {
     	}
     	
     	onRefreshSensor();
-    	draw();
+    	//draw(dc);
     	
 		var myTimer = new Timer.Timer();
     	myTimer.start(method(:onRefreshSensor), 5000, true);
@@ -67,7 +66,7 @@ class RemarCoeurView extends WatchUi.View {
     // Update the view
     function onUpdate(dc) {
         // Call the parent onUpdate function to redraw the layout
-        draw();        
+        draw(dc);        
         View.onUpdate(dc);
     }
 
