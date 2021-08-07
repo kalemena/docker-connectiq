@@ -33,22 +33,11 @@ class RemarCoeurView extends WatchUi.View {
         setLayout(Rez.Layouts.MainLayout(dc));
     }
 
-    // Called when this View is brought to the foreground. Restore
-    // the state of this View and prepare it to be shown. This includes
-    // loading resources into memory.
-    function onShow() {
-    	for(var i = 0; i < 4; i += 1) {
-    		me.mSensorValues[i] = "0";
-    	}
-    	
-		var myTimer = new Timer.Timer();
-    	myTimer.start(method(:onRefreshSensor), 5000, true);
-    }
-
-    // Update the view
-    function onUpdate(dc) {
-        // Call the parent onUpdate function to redraw the layout
-        for(var i = 0; i < 4; i += 1) {
+	function draw() {
+		// dc.setColor(Gfx.COLOR_BLUE, Gfx.COLOR_WHITE);
+		// dc.fillRectangle(0, 0, widthX, widthY);
+		
+		for(var i = 0; i < 4; i += 1) {
         	var fieldTemplate = "output$1$";
 			var myParams = [i];
 			var fieldName = Lang.format(fieldTemplate, myParams);
@@ -57,7 +46,28 @@ class RemarCoeurView extends WatchUi.View {
 	        // mSensorLabel[i]
 	        output.setText(me.mSensorValues[i] + " " + mSensorMetric[i]);
         }
-        
+		
+	}
+
+    // Called when this View is brought to the foreground. Restore
+    // the state of this View and prepare it to be shown. This includes
+    // loading resources into memory.
+    function onShow() {
+    	for(var i = 0; i < 4; i += 1) {
+    		me.mSensorValues[i] = "0";
+    	}
+    	
+    	onRefreshSensor();
+    	draw();
+    	
+		var myTimer = new Timer.Timer();
+    	myTimer.start(method(:onRefreshSensor), 5000, true);
+    }
+
+    // Update the view
+    function onUpdate(dc) {
+        // Call the parent onUpdate function to redraw the layout
+        draw();        
         View.onUpdate(dc);
     }
 
