@@ -1,5 +1,6 @@
 using Toybox.WatchUi;
 using Toybox.Lang;
+using Toybox.Sensor;
 using Toybox.SensorHistory;
 using Toybox.Graphics as Gfx;
 
@@ -27,6 +28,9 @@ class RemarCoeurView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
+        
+        Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
+    	Sensor.enableSensorEvents(method(:onSensorHeartRate));
     }
 
     // Load your resources here
@@ -86,10 +90,18 @@ class RemarCoeurView extends WatchUi.View {
 	    return null;
     }
     
+    function onSensorHeartRate(sensorInfo) {
+    	// System.println("Heart Rate: " + sensorInfo.heartRate);
+    	var HR = sensorInfo.heartRate;
+        if( HR != null ) {
+            me.mSensorValues[0] = HR.toString();
+        }
+	}
+    
     function onRefreshSensor() {
     	// System.println(".");
     
-    	for(var i = 0; i < 4; i += 1) {
+    	for(var i = 1; i < 4; i += 1) {
 		    var sensorValue = me.getLatestSensorHistory(i);
 		    
 			if (sensorValue == null) {
