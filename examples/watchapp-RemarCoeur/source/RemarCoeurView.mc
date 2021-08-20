@@ -41,12 +41,19 @@ class RemarCoeurView extends WatchUi.View {
 	function draw(dc) {
 		
 		for(var i = 0; i < 4; i += 1) {
-        	var fieldTemplate = "output$1$";
-			var myParams = [i];
+        	var fieldTemplate = "fieldValue$1$";
+			var myParams = [ mSensorLabel[i] ];
 			var fieldName = Lang.format(fieldTemplate, myParams);
     	
+//    		var myText = new WatchUi.Text({
+//	            :text => me.mSensorValues[i] + " " + mSensorMetric[i],
+//	            :color=> Graphics.COLOR_WHITE,
+//	            :font => Graphics.FONT_LARGE,
+//	            :locX => WatchUi.LAYOUT_HALIGN_CENTER,
+//	            :locY => WatchUi.LAYOUT_VALIGN_CENTER
+//	        });
+    	
 	        var output = View.findDrawableById(fieldName);
-	        // mSensorLabel[i]
 	        output.setText(me.mSensorValues[i] + " " + mSensorMetric[i]);
         }
 		

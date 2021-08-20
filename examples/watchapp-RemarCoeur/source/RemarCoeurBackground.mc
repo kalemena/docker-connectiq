@@ -21,17 +21,17 @@ class Background extends WatchUi.Drawable {
     	var width      = dc.getWidth();
         var height     = dc.getHeight();
         
-        var hMin = 30;
-        var hStep = 45;
+        var hMin = 36;
+        var hSize = 40;
         
         for(var i = 0; i < 4; i += 1) {
-        	var hPos = hMin + hStep * i;
+        	var hPos = hMin + (hSize) * i;
         	
         	dc.setColor(mColors[i], Graphics.COLOR_WHITE);
-        	dc.fillRectangle(0, hPos, width, hPos + hStep);
+        	dc.fillRectangle(0, hPos, width, hSize);
         
         	dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
-        	dc.drawRectangle(-1, hPos, width+2, hPos + hStep);
+        	dc.drawRectangle(-1, hPos, width+2, hSize);
         }           
     }
 

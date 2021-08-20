@@ -1,10 +1,10 @@
 <layout id="MainLayout">
 	<drawable class="Background" />
 
-    <label id="output0" x="center" y="40" text="@Strings.prompt" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
-    <label id="output1" x="center" y="80" text="@Strings.prompt" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
-    <label id="output2" x="center" y="120" text="@Strings.prompt" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
-    <label id="output3" x="center" y="160" text="@Strings.prompt" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <label id="fieldValueHeart"     x="center" y="40"  text="? bpm" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_SMALL"/>
+    <label id="fieldValueTemp"      x="center" y="80"  text="? °C"  color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_SMALL"/>
+    <label id="fieldValuePressure"  x="center" y="120" text="? hPa" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_SMALL"/>
+    <label id="fieldValueElevation" x="center" y="160" text="? m"   color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_SMALL"/>
     
     <!-- <bitmap id="id_monkey" x="center" y="30" filename="../drawables/monkey.png" /> -->
 	
