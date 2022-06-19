@@ -9,8 +9,7 @@ pull:
 
 build:
 	@echo "+++ Building docker image +++"
-	docker pull ubuntu:20.04
-	docker build --build-arg VERSION=$(VERSION) -t kalemena/connectiq:$(VERSION) .
+	docker build --pull --build-arg VERSION=$(VERSION) -t kalemena/connectiq:$(VERSION) .
 	docker tag kalemena/connectiq:$(VERSION) kalemena/connectiq:latest
 
 console:
