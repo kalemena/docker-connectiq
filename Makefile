@@ -15,5 +15,8 @@ build:
 console:
 	bash ./run.sh
 
+connectiq:
+	bash ./run-ui.sh
+
 eclipse:
-	COMMAND=/opt/eclipse/eclipse bash ./run.sh
+	COMMAND=/opt/eclipse/eclipse bash ./run-ui.sh
